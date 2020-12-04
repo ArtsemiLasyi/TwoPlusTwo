@@ -23,11 +23,6 @@ html body {
   scroll-behavior: smooth;
 }
 
-body {
-  background-image: url("../images/background.jpg");
-  background-size: 100%;
-}
-
 .input {
   box-shadow: 2px 2px 6px 1px grey;
   border: medium;
@@ -91,8 +86,25 @@ body {
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto auto;
   grid-template-areas:
-    "l l l l a a a a a a a a"
+    "l l l l a a a a a a a la"
     "n n n n n n n n n n n n";
+}
+
+.language {
+  grid-area: la;
+  background-color: bisque;
+  width: 50%;
+}
+
+.language_elem {
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  color: black;
+  font-size: 1.5em;
+  background: #fb811d;
+  opacity: 0.75;
+  width: 100%;
 }
 
 .content {
@@ -113,6 +125,8 @@ body {
   font-family: "Roboto";
   margin: 0;
   font-style: normal;
+  background-image: url("../images/background.jpg");
+  background-size: 100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto auto auto 3em;

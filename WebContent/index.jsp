@@ -1,40 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <title>Гостиница "Два плюс два"</title>
-    <meta charset="UTF-8" />
-    <meta name="description" lang="ru" content="Главная страница сайта" />
-    <meta name="description" lang="en" content="Main page of site" />
-    <meta
-      name="keywords"
-      lang="ru"
-      content="Два, Плюс, +, 2, Отель, Гостиница"
-    />
-    <meta name="keywords" lang="en" content="Two, plus, +, 2, hotel" />
-    <link rel="shortcut icon" href="images/logo.png" type="image/png" />
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<%@ include file="head.jsp" %>
   </head>
   <body class="container">
-    <header class="header">
-      <div class="logo">
-        <img class="logoimg" src="images/biglogo_use.png" />
-      </div>
-      <div class=""></div>
-      <div class="account">
-        <a class="button" id="account_button" href="account.html"
-          >Регистрация</a
-        >
-      </div>
-      <nav class="navigation">
-        <a class="nav_menu" href="#booking">Найти номер</a>
-        <a class="nav_menu" href="#services">Услуги</a>
-        <a class="nav_menu" href="#about">О гостинице</a>
-        <a class="nav_menu" href="#reviews">Отзывы</a>
-        <a class="nav_menu" href="#contacts">Контакты</a>
-      </nav>
-    </header>
-    <content class="content">
+    <%@ include file="header.jsp" %>
+    <content class="content" id="main">
       <div class="article">
         <h2 class="bigtitle">БРОНИРУЙТЕ НОМЕРА НА НАШЕМ САЙТЕ</h2>
         <ul class="ul">
@@ -69,12 +41,7 @@
         </div>
         <br />
         <div>
-          <input
-            type="button"
-            class="button"
-            name="findHotelRoomButton"
-            value="Найти номер"
-          />
+          <input type="button" class="button" name="findHotelRoomButton" value="Найти номер"/>
         </div>
         <br />
       </form>
@@ -123,7 +90,7 @@
       </div>
       <div id="about" class="article">
         <h4 class="smalltitle">О гостинице</h4>
-        <p style="padding: 0.5em">
+        <p style="padding: 0.5em; font-size: 2em">
           Гостиница «Два плюс два» — один из лучших четырехзвездочных отелей
           города %ситинейм%. Гостиничный комплекс располагает современной
           инфраструктурой как для комфортного туристического отдыха, так и для
@@ -165,9 +132,9 @@
             <span class="plaintext">Вот оно, наше золото!</span>
           </div>
           <div class="topreview">
-            <h5 class="tinytitle">Алеся</h5>
-            <img class="picture" src="images/person5.jpg" />><br />
-            <span class="plaintext">Вот оно, наше золото!</span>
+            <h5 class="tinytitle">Давид</h5>
+            <img class="picture" src="images/person6.jpg" />><br />
+            <span class="plaintext">Никогда не упущу возможности посетить данную гостиницу!</span>
           </div>
         </div>
         <br />
@@ -216,8 +183,6 @@
         ></iframe>
       </div>
     </content>
-    <footer class="footer">
-      <p>© 2020 Гостиница "Два плюс два"</p>
-    </footer>
+    <%@ include file="footer.jsp" %>
   </body>
 </html>

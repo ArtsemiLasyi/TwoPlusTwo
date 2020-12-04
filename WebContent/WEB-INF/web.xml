@@ -27,6 +27,14 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>by.aaproduction.tpt.controller.AccountServlet</servlet-name>
-  	<url-pattern>/Main/account</url-pattern>
+  	<url-pattern>/Account</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>by.aaproduction.tpt.controller.NotFoundServlet</servlet-name>
+  	<servlet-class>by.aaproduction.tpt.controller.NotFoundServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>by.aaproduction.tpt.controller.NotFoundServlet</servlet-name>
+  	<url-pattern>/Notfound</url-pattern>
   </servlet-mapping>
 </web-app>
