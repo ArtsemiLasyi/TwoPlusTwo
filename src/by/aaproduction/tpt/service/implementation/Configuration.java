@@ -1,7 +1,7 @@
 /**
  * 
  */
-package by.aaproduction.tpt.controller;
+package by.aaproduction.tpt.service.implementation;
 
 /**
  * @author Artsemy

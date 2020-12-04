@@ -1,87 +1,112 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="ru">
+<html>
   <head>
   	<%@ include file="head.jsp" %>
   </head>
+  <fmt:setLocale value='<%=request.getSession().getAttribute("lang")%>'/>
+  <fmt:setBundle basename="resources.lang" var="loc"/>
+  <fmt:message bundle="${loc}" key="lang.label.bookrooms" var="bookrooms"/>
+  <fmt:message bundle="${loc}" key="lang.label.bestprice" var="bestprice"/>
+  <fmt:message bundle="${loc}" key="lang.label.specialoffers" var="specialoffers"/>
+  <fmt:message bundle="${loc}" key="lang.label.loyaltyprogram" var="loyaltyprogram"/>
+  <fmt:message bundle="${loc}" key="lang.label.hoteltelephone" var="hoteltelephone"/>
+  <fmt:message bundle="${loc}" key="lang.link.readmore" var="readmore"/>
+  <fmt:message bundle="${loc}" key="lang.label.roomreservation" var="roomreservation"/>
+  <fmt:message bundle="${loc}" key="lang.label.checkin" var="checkin"/>
+  <fmt:message bundle="${loc}" key="lang.label.checkout" var="checkout"/>
+  <fmt:message bundle="${loc}" key="lang.label.numberofpersons" var="numberofpersons"/>
+  <fmt:message bundle="${loc}" key="lang.link.findroom" var="findroom"/>
+  <fmt:message bundle="${loc}" key="lang.label.services" var="services"/>
+  <fmt:message bundle="${loc}" key="lang.link.rooms" var="rooms"/>
+  <fmt:message bundle="${loc}" key="lang.link.restaurants" var="restaurants"/>
+  <fmt:message bundle="${loc}" key="lang.link.lobbybar" var="lobbybar"/>
+  <fmt:message bundle="${loc}" key="lang.link.concerthall" var="concerthall"/>
+  <fmt:message bundle="${loc}" key="lang.link.gym" var="gym"/>
+  <fmt:message bundle="${loc}" key="lang.link.conferencecenter" var="conferencecenter"/>
+  <fmt:message bundle="${loc}" key="lang.label.abouthotel" var="abouthotel"/>
+  <fmt:message bundle="${loc}" key="lang.label.reviews" var="labelreviews"/>
+  <fmt:message bundle="${loc}" key="lang.link.writereview" var="writereview"/>
+  <fmt:message bundle="${loc}" key="lang.label.contacts" var="contacts"/>
+  <fmt:message bundle="${loc}" key="lang.label.hotelphone" var="hotelphone"/>
   <body class="container">
     <%@ include file="header.jsp" %>
     <content class="content" id="main">
       <div class="article">
-        <h2 class="bigtitle">БРОНИРУЙТЕ НОМЕРА НА НАШЕМ САЙТЕ</h2>
+        <h2 class="bigtitle">${bookrooms}</h2>
         <ul class="ul">
-          <li class="li"><img src="images/checkmark.png" />Лучшая цена</li>
+          <li class="li"><img src="images/checkmark.png" />${bestprice}</li>
           <li class="li">
-            <img src="images/checkmark.png" />Специальные предложения
+            <img src="images/checkmark.png" />${specialoffers}
           </li>
           <li class="li">
-            <img src="images/checkmark.png" />Программа лояльности
+            <img src="images/checkmark.png" />${loyaltyprogram}
           </li>
         </ul>
         <br />
-        <a class="link" href="specialoffers.html">Подробнее</a>
+        <a class="link" href="specialoffers.html">${readmore}</a>
       </div>
       <form id="booking" class="article" method="POST">
-        <h4 class="smalltitle">Бронирование номеров</h4>
+        <h4 class="smalltitle">${roomreservation}</h4>
         <div>
-          <span class="plaintext">Заезд:</span>
+          <span class="plaintext">${checkin}:</span>
           <input type="datetime" class="input" name="checkInDate" />
           <br />
         </div>
         <div>
-          <span class="plaintext">Выезд:</span>
+          <span class="plaintext">${checkout}:</span>
           <input type="datetime" class="input" name="checkOutDate" />
           <br />
         </div>
         <br />
         <div>
-          <span class="plaintext">Количество человек:</span>
+          <span class="plaintext">${numberofpersons}:</span>
           <input type="number" class="input" name="peopleNumber" />
           <br />
         </div>
         <br />
         <div>
-          <input type="button" class="button" name="findHotelRoomButton" value="Найти номер"/>
+          <input type="button" class="button" name="findHotelRoomButton" value=${findroom}/>
         </div>
         <br />
       </form>
       <div id="services" class="article">
-        <h4 class="smalltitle">Услуги</h4>
+        <h4 class="smalltitle">${services}</h4>
         <div class="services-wrapper">
           <div class="tablecell">
-            <a class="tinytitle" href="rooms.html">Номера</a>
+            <a class="tinytitle" href="rooms.html">${rooms}</a>
             <figure class="photo">
               <img class="picture" src="images/rooms.jpg" />
             </figure>
           </div>
           <div class="tablecell">
-            <a class="tinytitle" href="restaurants.html">Рестораны</a>
+            <a class="tinytitle" href="restaurants.html">${restaurants}</a>
             <figure class="photo">
               <img class="picture" src="images/restourant.jpg" />
             </figure>
           </div>
           <div class="tablecell">
-            <a class="tinytitle" href="lobbybar.html">Лобби-бар</a>
+            <a class="tinytitle" href="lobbybar.html">${lobbybar}</a>
             <figure class="photo">
               <img class="picture" src="images/lobbybar.jpg" />
             </figure>
           </div>
           <div class="tablecell">
-            <a class="tinytitle" href="concerthall.html">Концертный зал</a>
+            <a class="tinytitle" href="concerthall.html">${concerthall}</a>
             <figure class="photo">
               <img class="picture" src="images/concerthall.jpg" />
             </figure>
           </div>
           <div class="tablecell">
-            <a class="tinytitle" href="gym.html">Спортзал</a>
+            <a class="tinytitle" href="gym.html">${gym}</a>
             <figure class="photo">
               <img class="picture" src="images/gym.jpg" />
             </figure>
           </div>
           <div class="tablecell">
-            <a class="tinytitle" href="conferencecenter.html"
-              >Конференц-центр</a
-            >
+            <a class="tinytitle" href="conferencecenter.html">${conferencecenter}</a>
             <figure class="photo">
               <img class="picture" src="images/conferencecenter.jpg" />
             </figure>
@@ -89,7 +114,7 @@
         </div>
       </div>
       <div id="about" class="article">
-        <h4 class="smalltitle">О гостинице</h4>
+        <h4 class="smalltitle">${abouthotel}</h4>
         <p style="padding: 0.5em; font-size: 2em">
           Гостиница «Два плюс два» — один из лучших четырехзвездочных отелей
           города %ситинейм%. Гостиничный комплекс располагает современной
@@ -111,7 +136,7 @@
         </p>
       </div>
       <div id="reviews" class="article">
-        <h4 class="smalltitle">Отзывы</h4>
+        <h4 class="smalltitle">${labelreviews}</h4>
         <div class="tablerow">
           <div class="topreview">
             <h5 class="tinytitle">Максим</h5>
@@ -138,10 +163,10 @@
           </div>
         </div>
         <br />
-        <a class="link" href="reviews.html">Написать отзыв</a>
+        <a class="link" href="reviews.html">${writereview}</a>
       </div>
       <div id="contacts" class="article">
-        <h4 class="smalltitle">Контакты</h4>
+        <h4 class="smalltitle">${contacts}</h4>
         <div class="contacts-wrapper">
           <div class="tablecell">
             <h5 class="tinytitle">Telegram</h5>
@@ -150,7 +175,7 @@
             >
           </div>
           <div class="tablecell">
-            <h5 class="tinytitle">Vk</h5>
+            <h5 class="tinytitle">Vkontakte</h5>
             <a href="https://vk.com/twoplustwohotel" class="plaintext"
               >https://vk.com/twoplustwohotel</a
             >
@@ -162,7 +187,7 @@
             >
           </div>
           <div class="tablecell">
-            <h5 class="tinytitle">Телефон</h5>
+            <h5 class="tinytitle">${hotelphone}</h5>
             <span class="plaintext">+375298102020</span>
           </div>
         </div>

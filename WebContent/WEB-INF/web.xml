@@ -28,6 +28,8 @@
   <servlet-mapping>
   	<servlet-name>by.aaproduction.tpt.controller.AccountServlet</servlet-name>
   	<url-pattern>/Account</url-pattern>
+  	<url-pattern>/Login</url-pattern>
+  	<url-pattern>/Registration</url-pattern>
   </servlet-mapping>
   <servlet>
   	<servlet-name>by.aaproduction.tpt.controller.NotFoundServlet</servlet-name>

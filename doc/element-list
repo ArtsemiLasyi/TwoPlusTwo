@@ -1,4 +1,10 @@
 by.aaproduction.tpt.controller
+by.aaproduction.tpt.controller.command.implementation
+by.aaproduction.tpt.controller.command.interfaces
 by.aaproduction.tpt.dao.bean
+by.aaproduction.tpt.dao.exception
 by.aaproduction.tpt.dao.implementation
 by.aaproduction.tpt.dao.interfaces
+by.aaproduction.tpt.service.exception
+by.aaproduction.tpt.service.implementation
+by.aaproduction.tpt.service.interfaces

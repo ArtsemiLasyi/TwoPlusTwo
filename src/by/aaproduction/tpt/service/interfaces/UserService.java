@@ -4,15 +4,17 @@
 package by.aaproduction.tpt.service.interfaces;
 
 import by.aaproduction.tpt.dao.bean.User;
+import by.aaproduction.tpt.service.exception.ServiceException;
 
 /**
  * @author Artsemy
  *
  */
 public interface UserService {
-	void singIn(String login, String password);
 	
-	void singOut(String login);
+	void signIn(String login, String password) throws ServiceException;
 	
-	void registration(User user);
+	void signOut(String login) throws ServiceException;
+	
+	void registration(User user) throws ServiceException;
 }

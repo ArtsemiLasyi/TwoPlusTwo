@@ -1,7 +1,10 @@
 package by.aaproduction.tpt.controller;
 
-import java.io.IOException;
+import by.aaproduction.tpt.controller.command.implementation.ChangeLanguage;
+import by.aaproduction.tpt.controller.command.interfaces.Command;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.RequestDispatcher;
@@ -15,46 +18,57 @@ import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
-import by.aaproduction.tpt.controller.Configuration;
+import by.aaproduction.tpt.controller.command.implementation.Register;
+import by.aaproduction.tpt.controller.command.implementation.SignIn;
+import by.aaproduction.tpt.controller.command.interfaces.Command;
 
-@WebServlet("/Account")
+@WebServlet(urlPatterns = {"/Account", "/Login", "/Registration"})
 public class AccountServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-       
+	private HttpSession session;
+	private Logger logger;
+	
+	
+	private HashMap<String, Command> commandRepository = new HashMap<>();
+	
+	public void constructCommandRepository() {
+		commandRepository.put("/Login", new SignIn());
+		commandRepository.put("/Registration", new Register());
+	}
+	
     public AccountServlet() {
         super();
+        PropertyConfigurator.configure(this.getClass().getClassLoader().getResource("log4j.properties"));
     }
 
+    private HashMap<String, String> doGetHashMap = new HashMap<>();
+    
+    private void constructdoGetHashMap() {
+    	doGetHashMap.put("/Login", "/login.jsp");
+    	doGetHashMap.put("/Registration", "/registration.jsp");
+    	doGetHashMap.put("/Account", "/editaccount.jsp");
+    }
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-        try {
-        	Configuration conf = new Configuration();
-            String url = conf.getUrl();
-            String username = conf.getUsername();
-            String password = conf.getPassword();
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-            try (Connection conn = DriverManager.getConnection(url, username, password)) {
-            	request.getRequestDispatcher("/registration.jsp").forward(request, response);
-            }
-        }
-        catch(Exception ex) {
- 	
-        }
-        finally {
-        }
-		
+		constructdoGetHashMap();
+		String strCommand = request.getServletPath();
+		request.getRequestDispatcher(doGetHashMap.get(strCommand)).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-        PrintWriter writer = response.getWriter();
- 
-        String name = request.getParameter("userName");
-        String surname = request.getParameter("userSurname");
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        writer.write(name);
+		constructCommandRepository();
+		Command commandChangeLanguage = new ChangeLanguage();
+		commandChangeLanguage.execute(request, response);
+		String strCommand = request.getServletPath();
+		Command command = commandRepository.get(strCommand);
+		if (command != null)
+			command.execute(request, response);
+		doGet(request, response);
 	}
 
+	
+	
 }

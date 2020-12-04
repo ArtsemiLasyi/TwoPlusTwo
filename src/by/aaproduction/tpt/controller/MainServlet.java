@@ -1,8 +1,11 @@
 package by.aaproduction.tpt.controller;
 
+import by.aaproduction.tpt.controller.command.implementation.ChangeLanguage;
+import by.aaproduction.tpt.controller.command.interfaces.Command;
+
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import org.apache.log4j.Logger;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +30,9 @@ public class MainServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+		Command commandChangeLanguage = new ChangeLanguage();
+		commandChangeLanguage.execute(request, response);
+		RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 		view.forward(request, response);
 	}
 
