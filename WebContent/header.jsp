@@ -16,11 +16,11 @@
         <img class="logoimg" src="images/biglogo_use.png" />
       </div>
       <div>
-      	<form method="post" class="language" action="">
+      	<form method="post" class="language" action="Main">
         	<input type="hidden" class="language_elem" name="lang" value="ru" />
         	<input type="submit" class="language_elem" value="RU" /></input>
         </form>
-        <form method="post" class="language" action="">
+        <form method="post" class="language" action="Main">
         	<input type="hidden" class="language_elem" name="lang" value="en" />
             <input type="submit" class="language_elem" value="EN" /></input>
         </form>

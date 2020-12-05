@@ -27,6 +27,10 @@
           		<input type="text" class="input" name="usersurname" />
         	</div>
         	<div>
+          		<span class="plaintext">email:</span>
+          		<input type="email" class="input" name="email" required/>
+        	</div>
+        	<div>
           		<span class="plaintext">${login}:</span>
           		<input type="text" class="input" name="login" required/>
         	</div>

@@ -24,7 +24,7 @@ import by.aaproduction.tpt.controller.command.implementation.Register;
 import by.aaproduction.tpt.controller.command.implementation.SignIn;
 import by.aaproduction.tpt.controller.command.interfaces.Command;
 
-@WebServlet(urlPatterns = {"/Account", "/Login", "/Registration"})
+@WebServlet(urlPatterns = {"/Registration", "/Account", "/Login"})
 public class AccountServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -60,8 +60,6 @@ public class AccountServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		constructCommandRepository();
-		Command commandChangeLanguage = new ChangeLanguage();
-		commandChangeLanguage.execute(request, response);
 		String strCommand = request.getServletPath();
 		Command command = commandRepository.get(strCommand);
 		if (command != null)

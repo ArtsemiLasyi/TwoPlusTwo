@@ -16,5 +16,5 @@ public interface UserService {
 	
 	void signOut(String login) throws ServiceException;
 	
-	void registration(User user) throws ServiceException;
+	void registration(User user, String password) throws ServiceException;
 }
