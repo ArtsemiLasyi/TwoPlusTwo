@@ -31,37 +31,23 @@ public class AccountServlet extends HttpServlet {
 	private HttpSession session;
 	private Logger logger;
 	
+	private Controller controller;
 	
-	private HashMap<String, Command> commandRepository = new HashMap<>();
-	
-	public void constructCommandRepository() {
-		commandRepository.put("/Login", new SignIn());
-		commandRepository.put("/Registration", new Register());
-	}
 	
     public AccountServlet() {
         super();
         PropertyConfigurator.configure(this.getClass().getClassLoader().getResource("log4j.properties"));
-    }
-
-    private HashMap<String, String> doGetHashMap = new HashMap<>();
-    
-    private void constructdoGetHashMap() {
-    	doGetHashMap.put("/Login", "/login.jsp");
-    	doGetHashMap.put("/Registration", "/registration.jsp");
-    	doGetHashMap.put("/Account", "/editaccount.jsp");
+        controller = Controller.getInstance();
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		constructdoGetHashMap();
-		String strCommand = request.getServletPath();
-		request.getRequestDispatcher(doGetHashMap.get(strCommand)).forward(request, response);
+		String strPage = request.getServletPath();
+		request.getRequestDispatcher(controller.getPage(strPage)).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		constructCommandRepository();
 		String strCommand = request.getServletPath();
-		Command command = commandRepository.get(strCommand);
+		Command command = controller.getCommand(strCommand);
 		if (command != null)
 			command.execute(request, response);
 		doGet(request, response);

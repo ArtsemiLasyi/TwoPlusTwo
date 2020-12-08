@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.aaproduction.tpt.controller.command.interfaces.Command;
 import by.aaproduction.tpt.service.implementation.UserServiceImpl;
+import by.aaproduction.tpt.dao.bean.User;
 import by.aaproduction.tpt.service.interfaces.UserService;
 import by.aaproduction.tpt.service.implementation.FactoryService;
 import by.aaproduction.tpt.service.exception.ServiceException;
@@ -25,8 +26,9 @@ public class SignIn implements Command {
 		FactoryService factory = FactoryService.getInstance();
 		UserService userService = factory.getUserService();
 		try {
-			userService.signIn(login, password);
+			User user = userService.signIn(login, password);
 		} catch(ServiceException ex) {
+			
 		}
 	}
 }

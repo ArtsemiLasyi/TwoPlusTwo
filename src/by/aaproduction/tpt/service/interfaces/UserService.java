@@ -12,7 +12,7 @@ import by.aaproduction.tpt.service.exception.ServiceException;
  */
 public interface UserService {
 	
-	void signIn(String login, String password) throws ServiceException;
+	User signIn(String login, String password) throws ServiceException;
 	
 	void signOut(String login) throws ServiceException;
 	

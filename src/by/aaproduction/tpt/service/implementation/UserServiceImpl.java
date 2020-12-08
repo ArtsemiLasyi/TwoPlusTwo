@@ -14,16 +14,19 @@ import by.aaproduction.tpt.service.exception.ServiceException;
 public class UserServiceImpl implements UserService {
 	
 	@Override
-	public void signIn(String login, String password) throws ServiceException {
+	public User signIn(String login, String password) throws ServiceException {
 		
 		if (login == null || login.isEmpty()) { 
 			throw new ServiceException("Incorrect login");
-		}
-		
+		}		
 		try {
 			FactoryDAO daoObjectFactory= FactoryDAO.getInstance();
 			UserDAO userDAO = daoObjectFactory.getUserDAO();
-			userDAO.signIn(login, password);
+			User user = userDAO.signIn(login);
+			if (isEqualPasswordHash(password, user))
+				return user;
+			else
+				return null;
 		}
 		catch(DAOException ex){
 			throw new ServiceException(ex);
@@ -52,9 +55,13 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
-	private static String getSecurePassword(String password, String salt) {
-
-        String generatedPassword = null;
+	private boolean isEqualPasswordHash(String password, User user) throws ServiceException {
+		String hash = getSecurePassword(password, user.getSalt());
+		return hash.equals(user.getPasswordHash());
+	}
+	
+	private String getSecurePassword(String password, String salt) throws ServiceException {
+		String generatedPassword = null;
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(salt.getBytes());
@@ -64,8 +71,8 @@ public class UserServiceImpl implements UserService {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             generatedPassword = sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+        } catch (NoSuchAlgorithmException ex) {
+        	throw new ServiceException(ex);
         }
         return generatedPassword;
     }

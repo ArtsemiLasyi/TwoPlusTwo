@@ -18,22 +18,26 @@ import javax.servlet.http.HttpSession;
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private Controller controller;
+	
     public MainServlet() {
         super();
+        controller = Controller.getInstance();
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-		view.forward(request, response);
+		String strPage = request.getServletPath();
+		request.getRequestDispatcher(controller.getPage(strPage)).forward(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Command commandChangeLanguage = new ChangeLanguage();
-		commandChangeLanguage.execute(request, response);
-		RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-		view.forward(request, response);
+		String strCommand = request.getServletPath();
+		Command command = controller.getCommand(strCommand);
+		if (command != null)
+			command.execute(request, response);
+		doGet(request, response);
 	}
 
 }

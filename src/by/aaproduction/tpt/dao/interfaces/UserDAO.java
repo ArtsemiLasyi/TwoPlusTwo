@@ -5,7 +5,7 @@ import by.aaproduction.tpt.dao.exception.DAOException;
 
 public interface UserDAO {
 	
-	void signIn(String login, String password) throws DAOException;
+	User signIn(String login) throws DAOException;
 	
 	void registration(User user, String password, String salt) throws DAOException;
 }
