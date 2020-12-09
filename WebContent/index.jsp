@@ -146,10 +146,7 @@
           <div class="topreview">
             <h5 class="tinytitle">Илья</h5>
             <img class="picture" src="images/person4.jpg" />><br />
-            <span class="plaintext"
-              >Для этой гостинице у меня всегда найдется пара хороших
-              слов!</span
-            >
+            <span class="plaintext">Для этой гостинице у меня всегда найдется пара хороших слов!</span>
           </div>
           <div class="topreview">
             <h5 class="tinytitle">Алеся</h5>
@@ -163,28 +160,22 @@
           </div>
         </div>
         <br />
-        <a class="link" href="reviews.html">${writereview}</a>
+        <a class="link" href="Review">${writereview}</a>
       </div>
       <div id="contacts" class="article">
         <h4 class="smalltitle">${contacts}</h4>
         <div class="contacts-wrapper">
           <div class="tablecell">
             <h5 class="tinytitle">Telegram</h5>
-            <a href="https://t.me/twoplustwohotel" class="plaintext"
-              >t.me/twoplustwohotel</a
-            >
+            <a href="https://t.me/twoplustwohotel" class="plaintext">t.me/twoplustwohotel</a>
           </div>
           <div class="tablecell">
             <h5 class="tinytitle">Vkontakte</h5>
-            <a href="https://vk.com/twoplustwohotel" class="plaintext"
-              >https://vk.com/twoplustwohotel</a
-            >
+            <a href="https://vk.com/twoplustwohotel" class="plaintext">https://vk.com/twoplustwohotel</a>
           </div>
           <div class="tablecell">
             <h5 class="tinytitle">Email</h5>
-            <a href="twoplustwohotel@gmail.com" class="plaintext"
-              >twoplustwohotel@gmail.com</a
-            >
+            <a href="twoplustwohotel@gmail.com" class="plaintext">twoplustwohotel@gmail.com</a>
           </div>
           <div class="tablecell">
             <h5 class="tinytitle">${hotelphone}</h5>

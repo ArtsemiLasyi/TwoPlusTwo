@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 
 import by.aaproduction.tpt.dao.bean.User;
 import by.aaproduction.tpt.dao.exception.DAOException;
+import by.aaproduction.tpt.dao.implementation.connection.ConnectionPool;
 
 public class SQLUserDAO implements UserDAO {
 	
@@ -24,18 +25,18 @@ public class SQLUserDAO implements UserDAO {
 	private String sqlColumnSurname = "surname";
 	private String sqlColumnUserrole = "userrole";
 	
-	private String sqlAddNewUser = "INSERT INTO users (login , password_hash , salt , username , surname , email , userrole) Values (?, ?, ?, ?, ?, ?, 'USER') WHERE NOT EXISTS";
+	private String sqlAddNewUser = "INSERT INTO users (login , password_hash , salt , username , surname , email , userrole) Values (?, ?, ?, ?, ?, ?, 'USER')";
 	
 	private String sqlGetExistingUser = "SELECT * FROM users WHERE users.login = ?";
+	
+	
+	private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 	
 	@Override
 	public User signIn(String login) throws DAOException {
 		try {
-			Configuration conf = new Configuration();
-	        Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-            try (Connection conn = DriverManager.getConnection(conf.getUrl(), conf.getUsername(), conf.getPassword())) {
-            	String sql = "";
-            	try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            try (Connection connection = connectionPool.takeConnection()) {
+            	try (PreparedStatement preparedStatement = connection.prepareStatement(sqlGetExistingUser)) {
             		preparedStatement.setString(1, login);
             		ResultSet result = preparedStatement.executeQuery();
                     if(!result.next()) {
@@ -64,15 +65,14 @@ public class SQLUserDAO implements UserDAO {
 	@Override
 	public void registration(User user, String password, String salt) throws DAOException {
 		try {
-        	Configuration conf = new Configuration();
-	        Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-            try (Connection conn = DriverManager.getConnection(conf.getUrl(), conf.getUsername(), conf.getPassword())) {
-            	try(PreparedStatement preparedStatement = conn.prepareStatement(sqlAddNewUser)) {
+            try (Connection connection = connectionPool.takeConnection()) {
+            	try(PreparedStatement preparedStatement = connection.prepareStatement(sqlAddNewUser)) {
                     preparedStatement.setString(1, user.getLogin());
                     preparedStatement.setString(2, password);
                     preparedStatement.setString(3, salt);
                     preparedStatement.setString(4, user.getName());
                     preparedStatement.setString(5, user.getSurname());
+                    preparedStatement.setString(6, user.getEmail());
                     if (preparedStatement.executeUpdate() == 0)
                     	throw new DAOException("A user with this login already exists!");
                 }

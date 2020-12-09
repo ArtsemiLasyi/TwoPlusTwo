@@ -4,15 +4,27 @@ public class Room {
 	
 	private int numberOfPeople;
 	
-	private int price;
+	private double price;
 	
 	private long id;
+	
+	private int number;
 	
 	private boolean hasAddedPlace;
 	
 	private boolean mealsIncluded;
 	
+	private boolean isBusy;
+	
 	private String about;
+	
+	public void setIsBusy(boolean flag) {
+		this.isBusy = flag;
+	}
+	
+	public boolean getIsBusy() {
+		return this.isBusy;
+	}
 	
 	public void setAbout(String about) {
 		this.about = about;
@@ -22,12 +34,20 @@ public class Room {
 		return this.about;
 	}
 	
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	
-	public int getPrice() {
+	public double getPrice() {
 		return this.price;
+	}
+	
+	public void setNumberOfRoom(int numberofroom) {
+		this.number = numberofroom;
+	}
+	
+	public int getNumberOfRoom() {
+		return this.number;
 	}
 	
 	public void setNumberOfPeople(int numberofpeople) {

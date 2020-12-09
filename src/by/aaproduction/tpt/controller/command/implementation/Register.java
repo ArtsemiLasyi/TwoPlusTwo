@@ -43,7 +43,7 @@ public class Register implements Command {
 		try {
 			userService.registration(user, password);
 		} catch (ServiceException ex) {
-		
+			ex.printStackTrace();
 		}
 	}
 	

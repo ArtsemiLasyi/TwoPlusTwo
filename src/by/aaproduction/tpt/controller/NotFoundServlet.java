@@ -6,6 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
+import by.aaproduction.tpt.controller.command.interfaces.Command;
 
 /**
  * Servlet implementation class NotFoundServlet
@@ -13,28 +19,36 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Notfound")
 public class NotFoundServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private HttpSession session;
+	private Logger logger;
+	
+	private Controller controller;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public NotFoundServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        PropertyConfigurator.configure(this.getClass().getClassLoader().getResource("log4j.properties"));
+        controller = Controller.getInstance();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String strPage = request.getServletPath();
+		request.getRequestDispatcher(controller.getPage(strPage)).forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String strCommand = request.getServletPath();
+		Command command = controller.getCommand(strCommand);
+		if (command != null)
+			command.execute(request, response);
 		doGet(request, response);
 	}
 

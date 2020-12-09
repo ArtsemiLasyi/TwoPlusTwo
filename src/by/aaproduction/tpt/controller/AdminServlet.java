@@ -14,20 +14,22 @@ import org.apache.log4j.PropertyConfigurator;
 import by.aaproduction.tpt.controller.command.interfaces.Command;
 
 /**
- * Servlet implementation class RoomServlet
+ * Servlet implementation class AdminServlet
  */
-@WebServlet(urlPatterns = {"/Room", "/Request"})
-public class RoomServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/Admin", "/AccountManagement", "/RoomManagement", "/RequestManagement"})
+public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	private HttpSession session;
 	private Logger logger;
 	
 	private Controller controller;
 	
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RoomServlet() {
+    public AdminServlet() {
         super();
         PropertyConfigurator.configure(this.getClass().getClassLoader().getResource("log4j.properties"));
         controller = Controller.getInstance();

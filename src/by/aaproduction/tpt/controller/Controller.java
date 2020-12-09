@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import by.aaproduction.tpt.controller.command.implementation.Register;
 import by.aaproduction.tpt.controller.command.implementation.SignIn;
+import by.aaproduction.tpt.controller.command.implementation.ViewRooms;
+import by.aaproduction.tpt.controller.command.implementation.WriteReview;
 import by.aaproduction.tpt.controller.command.implementation.ChangeLanguage;
 import by.aaproduction.tpt.controller.command.interfaces.Command;
 
@@ -36,6 +38,8 @@ public class Controller {
 		commandRepository.put("/Main", new ChangeLanguage());
 		commandRepository.put("/Login", new SignIn());
 		commandRepository.put("/Registration", new Register());
+		commandRepository.put("/Review", new WriteReview());
+		commandRepository.put("/Room", new ViewRooms());
 	}
 
     
@@ -45,6 +49,8 @@ public class Controller {
     	doGetHashMap.put("/Registration", "/registration.jsp");
     	doGetHashMap.put("/Account", "/editaccount.jsp");
     	doGetHashMap.put("/Main", "/index.jsp");
+    	doGetHashMap.put("/Review", "review.jsp");
+    	
     }
 
 }
