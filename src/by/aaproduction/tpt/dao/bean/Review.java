@@ -11,18 +11,28 @@ import by.aaproduction.tpt.dao.bean.User;
  */
 public class Review {
 	
-	private User user;
+	private int id;
+	
+	private int userId;
 	
 	private String reviewText;
 	
 	private String date;
 	
-	public User getUser() {
-		return this.user;
+	public int getId() {
+		return this.id;
 	}
 	
-	public void setUser(User user) {
-		this.user = user; 
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getUserId() {
+		return this.userId;
+	}
+	
+	public void setUserId(int userid) {
+		this.userId = userid; 
 	}
 	
 	public String getReviewText() {

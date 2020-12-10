@@ -6,7 +6,7 @@ public class Room {
 	
 	private double price;
 	
-	private long id;
+	private int id;
 	
 	private int number;
 	
@@ -18,12 +18,36 @@ public class Room {
 	
 	private String about;
 	
-	public void setIsBusy(boolean flag) {
-		this.isBusy = flag;
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return this.id;
+	}
+	
+	public void setHasAddedPlace(boolean hasaddedprice) {
+		this.hasAddedPlace = hasaddedprice;
+	}
+	
+	public boolean getHasAddedPlace() {
+		return this.hasAddedPlace;
+	}
+	
+	public void setIsBusy(boolean isbusy) {
+		this.isBusy = isbusy;
 	}
 	
 	public boolean getIsBusy() {
 		return this.isBusy;
+	}
+	
+	public void setMealsIncluded(boolean mealsincluded) {
+		this.mealsIncluded = mealsincluded;
+	}
+	
+	public boolean getMealsIncluded() {
+		return this.mealsIncluded;
 	}
 	
 	public void setAbout(String about) {

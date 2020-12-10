@@ -14,7 +14,5 @@ public interface UserService {
 	
 	User signIn(String login, String password) throws ServiceException;
 	
-	void signOut(String login) throws ServiceException;
-	
 	void registration(User user, String password) throws ServiceException;
 }

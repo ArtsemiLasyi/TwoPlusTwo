@@ -10,6 +10,7 @@ import by.aaproduction.tpt.dao.bean.User;
 import by.aaproduction.tpt.dao.exception.DAOException;
 import by.aaproduction.tpt.dao.implementation.connection.ConnectionPool;
 import by.aaproduction.tpt.dao.interfaces.AdminDAO;
+import by.aaproduction.tpt.utils.TypeConverter;
 
 public class SQLAdminDAO implements AdminDAO {
 	
@@ -75,9 +76,11 @@ public class SQLAdminDAO implements AdminDAO {
                     while (result.next()) {
                     	Request request = new Request();
                         request.setSum(result.getDouble(sqlRequestsColumnSum));
-                        request.setCheckInDate(result.getString(sqlRequestsColumnCheckInDate);
+                        request.setCheckInDate(TypeConverter.convertFromStringToDate(result.getString(sqlRequestsColumnCheckInDate)));
+                        request.setCheckOutDate(TypeConverter.convertFromStringToDate(result.getString(sqlRequestsColumnCheckOutDate)));
                         requestList.instance.add(request);
                     }
+                    connectionPool.returnConnection(connection);
                     return requestList;
                 }
             	catch(Exception ex) {

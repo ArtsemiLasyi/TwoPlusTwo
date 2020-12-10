@@ -3,9 +3,11 @@ package by.aaproduction.tpt.controller;
 import java.util.HashMap;
 
 import by.aaproduction.tpt.controller.command.implementation.Register;
+import by.aaproduction.tpt.controller.command.implementation.SeeAllRequests;
 import by.aaproduction.tpt.controller.command.implementation.SignIn;
 import by.aaproduction.tpt.controller.command.implementation.ViewRooms;
 import by.aaproduction.tpt.controller.command.implementation.WriteReview;
+import by.aaproduction.tpt.controller.command.implementation.BookRoom;
 import by.aaproduction.tpt.controller.command.implementation.ChangeLanguage;
 import by.aaproduction.tpt.controller.command.interfaces.Command;
 
@@ -40,6 +42,8 @@ public class Controller {
 		commandRepository.put("/Registration", new Register());
 		commandRepository.put("/Review", new WriteReview());
 		commandRepository.put("/Room", new ViewRooms());
+		commandRepository.put("/Request", new BookRoom());
+		commandRepository.put("/RequestManagement", new SeeAllRequests());
 	}
 
     
@@ -50,7 +54,9 @@ public class Controller {
     	doGetHashMap.put("/Account", "/editaccount.jsp");
     	doGetHashMap.put("/Main", "/index.jsp");
     	doGetHashMap.put("/Review", "review.jsp");
-    	
+    	doGetHashMap.put("/Request", "request.jsp");
+    	doGetHashMap.put("/Room", "room.jsp");
+    	doGetHashMap.put("/RequestManagement", "adminrequest.jsp");
     }
 
 }

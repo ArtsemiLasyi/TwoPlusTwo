@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import by.aaproduction.tpt.dao.bean.User;
 import by.aaproduction.tpt.dao.exception.DAOException;
 import by.aaproduction.tpt.dao.implementation.connection.ConnectionPool;
+import by.aaproduction.tpt.dao.implementation.connection.exception.ConnectionPoolException;
 
 public class SQLUserDAO implements UserDAO {
 	
@@ -50,6 +51,7 @@ public class SQLUserDAO implements UserDAO {
                     user.setSalt(result.getString(sqlColumnSalt));
                     user.setRole(result.getString(sqlColumnUserrole));
                     user.setPasswordHash(result.getString(sqlColumnPasswordhash));
+                    connectionPool.returnConnection(connection);
                     return user;
             	}
             	catch (Exception ex) {
@@ -64,27 +66,25 @@ public class SQLUserDAO implements UserDAO {
 	
 	@Override
 	public void registration(User user, String password, String salt) throws DAOException {
-		try {
-            try (Connection connection = connectionPool.takeConnection()) {
-            	try(PreparedStatement preparedStatement = connection.prepareStatement(sqlAddNewUser)) {
-                    preparedStatement.setString(1, user.getLogin());
-                    preparedStatement.setString(2, password);
-                    preparedStatement.setString(3, salt);
-                    preparedStatement.setString(4, user.getName());
-                    preparedStatement.setString(5, user.getSurname());
-                    preparedStatement.setString(6, user.getEmail());
-                    if (preparedStatement.executeUpdate() == 0)
-                    	throw new DAOException("A user with this login already exists!");
-                }
-            	catch(Exception ex) {
-                	throw new DAOException(ex);
-                }
-            }
+		try (Connection connection = connectionPool.takeConnection()) {
+			try(PreparedStatement preparedStatement = connection.prepareStatement(sqlAddNewUser)) {
+				preparedStatement.setString(1, user.getLogin());
+                preparedStatement.setString(2, password);
+                preparedStatement.setString(3, salt);
+                preparedStatement.setString(4, user.getName());
+                preparedStatement.setString(5, user.getSurname());
+                preparedStatement.setString(6, user.getEmail());
+                int rows = preparedStatement.executeUpdate();
+                connectionPool.returnConnection(connection);
+                if (rows == 0)
+                	throw new DAOException("A user with this login already exists!");
+             }
+			 catch(Exception ex) {
+                throw new DAOException(ex);
+             }
         }
-        catch(Exception ex) {
-        	throw new DAOException(ex);
-        }
-        finally {
-        }
+		catch(Exception ex) {
+			throw new DAOException(ex);
+		}
 	}
 }
